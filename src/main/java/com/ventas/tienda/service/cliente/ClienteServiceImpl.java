@@ -5,8 +5,8 @@ import com.ventas.tienda.dto.cliente.ClienteDto;
 import com.ventas.tienda.dto.cliente.ClienteMapper;
 import com.ventas.tienda.dto.cliente.ClienteToSaveDto;
 import com.ventas.tienda.exception.NotAbleToDeleteException;
+import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ClienteRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDto actualizarCliente(Long idCliente, ClienteToSaveDto clienteDto) {
+    public ClienteDto actualizarCliente(Long idCliente, ClienteToSaveDto clienteDto) throws NotFoundExceptionEntity {
         return clienteRepository.findById(idCliente).map(cliente ->{
             cliente.setNombreCliente(clienteDto.nombreCliente());
             cliente.setEmailCliente(clienteDto.emailCliente());
@@ -41,13 +41,13 @@ public class ClienteServiceImpl implements ClienteService {
             Cliente clienteGuardado = clienteRepository.save(cliente);
 
             return clienteMapper.toDto(clienteGuardado);
-        }).orElseThrow(()->new EntityNotFoundException("Cliente no encontrado,"));
+        }).orElseThrow(()->new NotFoundExceptionEntity("Cliente no encontrado,"));
     }
 
     @Override
-    public ClienteDto buscarClientePorId(Long idCliente) {
+    public ClienteDto buscarClientePorId(Long idCliente) throws NotFoundExceptionEntity {
         Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado."));
+                .orElseThrow(() -> new NotFoundExceptionEntity("Cliente no encontrado."));
 
         return clienteMapper.toDto(cliente);
     }
@@ -70,21 +70,21 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDto buscarClientePorEmail(String emailCliente) throws EntityNotFoundException {
+    public ClienteDto buscarClientePorEmail(String emailCliente) throws  NotFoundExceptionEntity {
         Cliente cliente = clienteRepository.findByEmailCliente(emailCliente);
 
         if(Objects.isNull(cliente)){
-            throw new EntityNotFoundException("Cliente no encontrado.");
+            throw new NotFoundExceptionEntity("Cliente no encontrado.");
         }
         return clienteMapper.toDto(cliente);
     }
 
     @Override
-    public List<ClienteDto> buscarClientesPorDireccion(String direccioncliente) {
+    public List<ClienteDto> buscarClientesPorDireccion(String direccioncliente) throws NotFoundExceptionEntity {
         List<Cliente> clientes = clienteRepository.findByDireccionCLiente(direccioncliente);
 
         if(clientes.isEmpty()){
-            throw new EntityNotFoundException("Clientes no encontrado.");
+            throw new NotFoundExceptionEntity("Clientes no encontrado.");
         }
         return clientes.stream()
                 .map(cliente -> clienteMapper.toDto(cliente))
@@ -92,11 +92,11 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<ClienteDto> buscarClientesQueComiencenPor(String nombreCliente) {
+    public List<ClienteDto> buscarClientesQueComiencenPor(String nombreCliente) throws NotFoundExceptionEntity {
         List<Cliente> clientes = clienteRepository.buscarClientesQueComiencenPor(nombreCliente);
 
         if(clientes.isEmpty()){
-            throw new EntityNotFoundException("Clientes no encontrado.");
+            throw new NotFoundExceptionEntity("Clientes no encontrado.");
         }
         return clientes.stream()
                 .map(cliente -> clienteMapper.toDto(cliente))

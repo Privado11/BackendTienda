@@ -14,6 +14,7 @@ import com.ventas.tienda.Entities.Cliente;
 import com.ventas.tienda.dto.cliente.ClienteDto;
 import com.ventas.tienda.dto.cliente.ClienteMapper;
 import com.ventas.tienda.dto.cliente.ClienteToSaveDto;
+import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,7 +76,6 @@ class ClienteServiceImplTest {
                 "privado@privado.com",
                 "Calle 29");
 
-        when(clienteMapper.clienteToSaveDtotoEntity(clienteAGuardar)).thenReturn(cliente);
 
         when(clienteMapper.toDto(any())).thenReturn(clienteDto);
 
@@ -85,7 +85,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void actualizarCliente() {
+    void actualizarCliente() throws NotFoundExceptionEntity {
         when(clienteRepository.findById(any())).thenReturn(Optional.of(cliente));
 
         ClienteToSaveDto clienteAActualizar= new ClienteToSaveDto(null,
@@ -103,7 +103,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientePorId() {
+    void buscarClientePorId() throws NotFoundExceptionEntity {
         when(clienteRepository.findById(any())).thenReturn(Optional.of(cliente));
 
         when(clienteMapper.toDto(any())).thenReturn(clienteDto);
@@ -135,7 +135,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientePorEmail() {
+    void buscarClientePorEmail() throws NotFoundExceptionEntity {
         String emailCliente = "privado@privado.com";
 
         when(clienteRepository.findByEmailCliente(any())).thenReturn(cliente);
@@ -148,7 +148,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientesPorDireccion() {
+    void buscarClientesPorDireccion() throws NotFoundExceptionEntity {
         List<Cliente> clientes = List.of(cliente, cliente3);
         String direccionCliente = "Calle 29";
 
@@ -161,7 +161,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientesQueComiencenPor() {
+    void buscarClientesQueComiencenPor() throws NotFoundExceptionEntity {
         List<Cliente> clientes = List.of(cliente, cliente3);
         String nombreCliente = "Walter";
 
