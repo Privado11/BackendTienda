@@ -2,6 +2,8 @@ package com.ventas.tienda.dto.pedido;
 
 import com.ventas.tienda.dto.cliente.ClienteDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
+import com.ventas.tienda.dto.itemPedido.ItemPedidoDto;
+import com.ventas.tienda.dto.pago.PagoDto;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -10,12 +12,17 @@ import java.util.List;
 public record PedidoDto(
         Long idPedido,
         LocalDateTime fechaPedido,
+        String status,
+
         ClienteDto cliente,
-        com.ventas.tienda.dto.pago.PagoDto pago,
+        PagoDto pago,
         DetalleEnvioDto detalleEnvio,
-        List<com.ventas.tienda.dto.itemPedido.ItemPedidoDto> itemPedidos
+        List<ItemPedidoDto> itemPedidos
 ) {
-    public List<com.ventas.tienda.dto.itemPedido.ItemPedidoDto> itemPedidos(){
+    public List<ItemPedidoDto> itemPedidos(){
+        if(itemPedidos == null){
+            return Collections.emptyList();
+        }
         return Collections.unmodifiableList(itemPedidos);
     }
 }

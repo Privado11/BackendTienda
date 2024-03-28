@@ -59,7 +59,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
                 "Efectivo",
                 pedidosList().get(0)
                 );
-        //when(pagoRepository.save(any())).thenReturn(pago);
+        when(pagoRepository.save(any())).thenReturn(pago);
 
        when(pagoMapper.toDto(any())).thenReturn(pagoDto);
 

@@ -10,7 +10,7 @@ import java.util.List;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Cliente findByEmailCliente(String email);
 
-    List<Cliente> findByDireccionCLiente(String direccion);
+    List<Cliente> findByDireccionCliente(String direccion);
 
     @Query("select c from Cliente c where c.nombreCliente like :nombre%")
     List<Cliente> buscarClientesQueComiencenPor(@Param("nombre") String nombre);

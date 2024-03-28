@@ -24,7 +24,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
         Cliente cliente = Cliente.builder()
                 .nombreCliente("Walter Jiménez")
                 .emailCliente("privado6@privado.com")
-                .direccionCLiente("Calle 29")
+                .direccionCliente("Calle 29")
                 .pedidosCliente(pedidosList())
                 .build();
         clienteRepository.save(cliente);
@@ -32,7 +32,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
         Cliente cliente2 = Cliente.builder()
                 .nombreCliente("Andrés Licona")
                 .emailCliente("privado7@privado.com")
-                .direccionCLiente("Calle 37")
+                .direccionCliente("Calle 37")
                 .pedidosCliente(List.of(pedidosList().get(0)))
                 .build();
         clienteRepository.save(cliente2);
@@ -49,7 +49,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
         Cliente cliente = Cliente.builder()
                 .nombreCliente("Walter Jiménez")
                 .emailCliente("privado3@privado.com")
-                .direccionCLiente("Calle 29")
+                .direccionCliente("Calle 29")
                 .pedidosCliente(pedidosList())
                 .build();
         Cliente clienteGuardado = clienteRepository.save(cliente);
@@ -79,7 +79,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
         inictMockCliente();
         String direccionCliente = "Calle 37";
 
-        List<Cliente> clientes = clienteRepository.findByDireccionCLiente(direccionCliente);
+        List<Cliente> clientes = clienteRepository.findByDireccionCliente(direccionCliente);
 
         System.out.println(clientes);
 

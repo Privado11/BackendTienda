@@ -51,6 +51,8 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
 
     @Test
     void guardarItemPedido() {
+        when(itemPedidoRepository.save(any())).thenReturn(itemPedido);
+
         ItemPedidoToSaveDto itemPedidoToSaveDto = new ItemPedidoToSaveDto(
                 null,
                 20,

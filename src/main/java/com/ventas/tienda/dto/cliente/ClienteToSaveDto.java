@@ -4,6 +4,6 @@ public record ClienteToSaveDto(
         Long idCliente,
         String nombreCliente,
         String emailCliente,
-        String direccionCLiente
+        String direccionCliente
 ) {
 }

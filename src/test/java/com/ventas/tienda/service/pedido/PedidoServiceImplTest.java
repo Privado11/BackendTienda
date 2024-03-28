@@ -6,6 +6,7 @@ import com.ventas.tienda.Entities.Pedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoMapper;
 import com.ventas.tienda.dto.pedido.PedidoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.PedidoRepository;
 import com.ventas.tienda.service.CreateEntytiesForTest;
@@ -61,6 +62,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
     @Test
     void guardarPedido() {
+        when(pedidoRepository.save(any())).thenReturn(pedido);
 
         PedidoToSaveDto pedidoAGuardar = new PedidoToSaveDto(null,
                 LocalDateTime.of(2023, 04, 10, 4, 12),
@@ -105,7 +107,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerPedido() throws NotFoundExceptionEntity{
+    void removerPedido() throws NotAbleToDeleteException {
         Long idPedido = 1l;
         when(pedidoRepository.findById(idPedido)).thenReturn(Optional.of(pedido));
         pedidoService.removerPedido(idPedido);
@@ -119,7 +121,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
         when(pedidoRepository.findAll()).thenReturn(pedidos);
 
-        List<PedidoDto> pedidosDto = pedidoService.getAllItemPedidos();
+        List<PedidoDto> pedidosDto = pedidoService.getAllPedidos();
 
         assertThat(pedidosDto).isNotEmpty();
         assertThat(pedidosDto).hasSize(3);
@@ -152,13 +154,13 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
     @Test
     void buscarPedidosyItemsPorCliente() {
-        Cliente cliente = clienteList().get(0);
+        Long idCliente = clienteList().get(0).getIdCliente();
 
         List<Pedido> pedidos = List.of(pedido);
 
-        when(pedidoRepository.pedidosyItemsPorCliente(cliente)).thenReturn(pedidos);
+        when(pedidoRepository.pedidosyItemsPorCliente(idCliente)).thenReturn(pedidos);
 
-        List<PedidoDto> pedidoDtoList = pedidoService.BuscarPedidosyItemsPorCliente(cliente);
+        List<PedidoDto> pedidoDtoList = pedidoService.BuscarPedidosyItemsPorCliente(idCliente);
 
         assertThat(pedidoDtoList).hasSize(1);
 

@@ -7,6 +7,7 @@ import com.ventas.tienda.Entities.Pedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoMapper;
 import com.ventas.tienda.dto.pedido.PedidoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public PedidoDto guardarPedido(PedidoToSaveDto pedidoDto) {
         Pedido pedido = pedidoMapper.pedidoToSaveDtoToEntity(pedidoDto);
-        return pedidoMapper.toDto(pedido);
+        return pedidoMapper.toDto(pedidoRepository.save(pedido));
     }
 
 
@@ -37,10 +38,7 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidoRepository.findById(idPedido)
                 .map(pedidoE->{
                         pedidoE.setFechaPedido(pedido.fechaPedido());
-                        pedidoE.setDetalleEnvio(pedido.detalleEnvio());
-                        pedidoE.setPago(pedido.pago());
                         pedidoE.setCliente(pedido.cliente());
-
                         Pedido pedidoNew = pedidoRepository.save(pedidoE);
 
                         return pedidoMapper.toDto(pedidoNew);
@@ -57,14 +55,14 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public void removerPedido(Long idPedido) throws NotFoundExceptionEntity {
+    public void removerPedido(Long idPedido) throws NotAbleToDeleteException {
         Pedido pedido = pedidoRepository.findById((idPedido))
-                .orElseThrow(() -> new NotFoundExceptionEntity("Pedido no encontrado."));
+                .orElseThrow(() -> new NotAbleToDeleteException("Pedido no encontrado."));
         pedidoRepository.delete(pedido);
     }
 
     @Override
-    public List<PedidoDto> getAllItemPedidos() {
+    public List<PedidoDto> getAllPedidos() {
         return pedidoRepository.findAll()
                 .stream()
                 .map(pedido -> pedidoMapper.toDto(pedido))
@@ -88,8 +86,8 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> BuscarPedidosyItemsPorCliente(Cliente cliente) {
-        return pedidoRepository.pedidosyItemsPorCliente(cliente)
+    public List<PedidoDto> BuscarPedidosyItemsPorCliente(Long idCliente) {
+        return pedidoRepository.pedidosyItemsPorCliente(idCliente)
                 .stream()
                 .map(pedido -> pedidoMapper.toDto(pedido))
                 .toList();

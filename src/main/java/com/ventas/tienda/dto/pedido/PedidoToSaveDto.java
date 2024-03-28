@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 public record PedidoToSaveDto(
         Long idPedido,
         LocalDateTime fechaPedido,
-        Cliente cliente,
-        Pago pago,
-        DetalleEnvio detalleEnvio
+        String status,
+        Cliente cliente
 ) {
 
 }

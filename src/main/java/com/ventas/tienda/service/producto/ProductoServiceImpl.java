@@ -4,8 +4,10 @@ import com.ventas.tienda.Entities.Producto;
 import com.ventas.tienda.dto.producto.ProductoDto;
 import com.ventas.tienda.dto.producto.ProductoMapper;
 import com.ventas.tienda.dto.producto.ProductoSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class ProductoServiceImpl implements ProductoService {
     private final ProductoRepository productoRepository;
     private ProductoMapper productoMapper;
 
+    @Autowired
     public ProductoServiceImpl(ProductoRepository productoRepository, ProductoMapper productoMapper) {
         this.productoRepository = productoRepository;
         this.productoMapper = productoMapper;
@@ -25,7 +28,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public ProductoDto guardarProducto(ProductoSaveDto producto) {
         Producto productoG = productoMapper.productoToSaveDtoToEntity(producto);
-        return productoMapper.toDto(productoG);
+        return productoMapper.toDto(productoRepository.save(productoG));
     }
 
     @Override
@@ -51,9 +54,9 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void removerProducto(Long idProducto) throws NotFoundExceptionEntity {
+    public void removerProducto(Long idProducto) throws NotAbleToDeleteException {
         Producto producto = productoRepository.findById(idProducto)
-                .orElseThrow(() -> new NotFoundExceptionEntity("Producto no encontrado."));
+                .orElseThrow(() -> new NotAbleToDeleteException("Producto no encontrado."));
 
         productoRepository.delete(producto);
 

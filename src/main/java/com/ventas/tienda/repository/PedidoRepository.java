@@ -15,7 +15,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     List<Pedido> findByClienteAndStatus(Cliente cliente, String status);
 
-    @Query("select p from Pedido p join fetch p.itemsPedidos where p.cliente = :cliente")
-    List<Pedido> pedidosyItemsPorCliente(@Param("cliente") Cliente cliente);
+    @Query("select p from Pedido p join fetch p.itemsPedidos where p.cliente.idCliente = :idCliente")
+    List<Pedido> pedidosyItemsPorCliente(@Param("idCliente") Long idCliente);
 
 }

@@ -9,11 +9,14 @@ public record ClienteDto(
         Long idCliente,
         String nombreCliente,
         String emailCliente,
-        String direccionCLiente,
-        List<PedidoDto> pedidos
+        String direccionCliente,
+        List<PedidoDto> pedidosClientes
 ) {
 
-    public List<PedidoDto> pedidos(){
-        return Collections.unmodifiableList(pedidos);
+    public List<PedidoDto> pedidosClientes(){
+        if (pedidosClientes == null) {
+            return Collections.emptyList();
+        }
+        return Collections.unmodifiableList(pedidosClientes);
     }
 }

@@ -48,13 +48,13 @@ public abstract class CreateEntytiesForTest {
         Cliente cliente = Cliente.builder()
                 .nombreCliente("Walter Jiménez")
                 .emailCliente("privado@privado.com")
-                .direccionCLiente("Calle 29")
+                .direccionCliente("Calle 29")
                 .build();
 
         Cliente cliente2 = Cliente.builder()
                 .nombreCliente("Andrés Licona")
                 .emailCliente("privado2@privado.com")
-                .direccionCLiente("Calle 37")
+                .direccionCliente("Calle 37")
                 .build();
 
         return List.of(cliente, cliente2);

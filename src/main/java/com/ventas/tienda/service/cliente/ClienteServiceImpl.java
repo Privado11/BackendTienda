@@ -36,7 +36,7 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.findById(idCliente).map(cliente ->{
             cliente.setNombreCliente(clienteDto.nombreCliente());
             cliente.setEmailCliente(clienteDto.emailCliente());
-            cliente.setDireccionCLiente(clienteDto.direccionCLiente());
+            cliente.setDireccionCliente(clienteDto.direccionCliente());
 
             Cliente clienteGuardado = clienteRepository.save(cliente);
 
@@ -81,7 +81,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<ClienteDto> buscarClientesPorDireccion(String direccioncliente) throws NotFoundExceptionEntity {
-        List<Cliente> clientes = clienteRepository.findByDireccionCLiente(direccioncliente);
+        List<Cliente> clientes = clienteRepository.findByDireccionCliente(direccioncliente);
 
         if(clientes.isEmpty()){
             throw new NotFoundExceptionEntity("Clientes no encontrado.");

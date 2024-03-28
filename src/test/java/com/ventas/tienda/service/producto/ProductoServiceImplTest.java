@@ -14,6 +14,7 @@ import com.ventas.tienda.Entities.Producto;
 import com.ventas.tienda.dto.producto.ProductoDto;
 import com.ventas.tienda.dto.producto.ProductoMapper;
 import com.ventas.tienda.dto.producto.ProductoSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ProductoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +62,7 @@ class ProductoServiceImplTest {
     @Test
     void guardarProducto() {
 
-       // when(productoRepository.save(any())).thenReturn(producto);
+       when(productoRepository.save(any())).thenReturn(producto);
 
         ProductoSaveDto productoSaveDto = new ProductoSaveDto(null
         ,"Mouse Logitech", 500.0, 50);
@@ -104,7 +105,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void removerProducto() throws NotFoundExceptionEntity {
+    void removerProducto() throws NotAbleToDeleteException {
         Long idProducto = 1l;
 
         when(productoRepository.findById(idProducto)).thenReturn(Optional.of(producto));

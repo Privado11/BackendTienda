@@ -28,7 +28,7 @@ public class PagoServiceImpl implements PagoService {
     @Override
     public PagoDto guardarPago(PagoToSaveDto pago) {
         Pago pagoG = pagoMapper.pagoTosaveDtoToEntity(pago);
-        return pagoMapper.toDto(pagoG);
+        return pagoMapper.toDto(pagoRepository.save(pagoG));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class PagoServiceImpl implements PagoService {
 
                             Pago pagoG = pagoRepository.save(pagoE);
 
-                            return  pagoMapper.toDto(pagoE);
+                            return  pagoMapper.toDto(pagoG);
                         }
                 ).orElseThrow(() -> new NotFoundExceptionEntity("Pago no encontrado."));
     }

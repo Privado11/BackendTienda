@@ -14,6 +14,9 @@ public record ProductoDto(
 ) {
 
     public List<PedidoDto> pedidos(){
+        if(pedidos == null){
+            return Collections.emptyList();
+        }
         return Collections.unmodifiableList(pedidos);
     }
 }

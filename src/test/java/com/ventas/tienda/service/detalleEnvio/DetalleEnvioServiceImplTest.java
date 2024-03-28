@@ -49,6 +49,8 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
 
     @Test
     void guardarDetalleEnvio() {
+        when(detalleEnvioRepository.save(any())).thenReturn(detalleEnvio);
+
         DetalleEnvioToSaveDto detalleEnvioToSaveDto = new DetalleEnvioToSaveDto(
                 null,
                 "Calle 29",

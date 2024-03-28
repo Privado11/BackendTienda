@@ -19,7 +19,7 @@ public class Cliente {
     private Long idCliente;
     private String nombreCliente;
     private String emailCliente;
-    private String direccionCLiente;
+    private String direccionCliente;
 
     @OneToMany(mappedBy = "cliente")
     List<Pedido> pedidosCliente;

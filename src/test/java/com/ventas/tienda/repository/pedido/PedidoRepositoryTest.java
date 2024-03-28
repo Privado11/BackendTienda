@@ -95,9 +95,9 @@ class PedidoRepositoryTest extends AbstractIntegrationBDTest {
     @Test
     void pedidosyItemsPorCliente() {
         inictMockPedidos();
-        Cliente cliente = clientes.get(0);
+        Long idCliente = clientes.get(0).getIdCliente();
 
-        List<Pedido> pedidos = pedidoRepository.pedidosyItemsPorCliente(cliente);
+        List<Pedido> pedidos = pedidoRepository.pedidosyItemsPorCliente(idCliente);
 
         System.out.println(pedidos);
         assertThat(pedidos).isNotEmpty();
