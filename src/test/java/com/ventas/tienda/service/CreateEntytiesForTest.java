@@ -36,7 +36,7 @@ public abstract class CreateEntytiesForTest {
 
         Pedido pedido2 = Pedido.builder()
                 .fechaPedido(LocalDateTime.now())
-                .status("Pendiente")
+                .status("Pendientee")
                 .cliente(clientes.get(1))
                 .detalleEnvio(detalleEnvioList().get(1))
                 .build();
