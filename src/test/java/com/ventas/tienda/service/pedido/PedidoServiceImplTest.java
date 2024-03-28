@@ -1,6 +1,7 @@
 package com.ventas.tienda.service.pedido;
 
 
+import com.ventas.tienda.Entities.Cliente;
 import com.ventas.tienda.Entities.Pedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoMapper;
@@ -125,15 +126,41 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPedidosEntreFechas() throws NotFoundExceptionEntity{
+    void buscarPedidosEntreFechas(){
+        List<Pedido> pedidos = List.of(pedido, pedido);
+
+        when(pedidoRepository.pedidosEntreFechas(any(), any())).thenReturn(pedidos);
+
+        List<PedidoDto> pedidoDtoList = pedidoService.buscarPedidosEntreFechas(any(), any());
+
+        assertThat(pedidoDtoList).hasSize(2);
 
     }
 
     @Test
     void buscarPedidoPorClienteYStatus() {
+        Cliente cliente = clienteList().get(0);
+        String statusPedido = "pagado";
+        List<Pedido> pedidos = List.of(pedido);
+
+        when(pedidoRepository.findByClienteAndStatus(cliente, statusPedido)).thenReturn(pedidos);
+
+        List<PedidoDto> pedidoDtoList = pedidoService.buscarPedidoPorClienteYStatus(cliente, statusPedido);
+
+        assertThat(pedidoDtoList).hasSize(1);
     }
 
     @Test
     void buscarPedidosyItemsPorCliente() {
+        Cliente cliente = clienteList().get(0);
+
+        List<Pedido> pedidos = List.of(pedido);
+
+        when(pedidoRepository.pedidosyItemsPorCliente(cliente)).thenReturn(pedidos);
+
+        List<PedidoDto> pedidoDtoList = pedidoService.BuscarPedidosyItemsPorCliente(cliente);
+
+        assertThat(pedidoDtoList).hasSize(1);
+
     }
 }
