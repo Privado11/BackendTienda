@@ -17,7 +17,7 @@ public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
-    private Double totalpago;
+    private Double totalPago;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaPago;
     private String metodoPago;

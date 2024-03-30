@@ -18,7 +18,7 @@ public interface ItemPedidoService {
 
     List<ItemPedidoDto> buscarItemPedidoPorNombreProducto(String nombreProducto);
 
-    ItemPedidoDto buscarItemPedidoPorIdPedido(Long idPedido) throws NotFoundExceptionEntity;
+    List<ItemPedidoDto> buscarItemPedidoPorIdPedido(Long idPedido);
 
     Double sumaVentasProducto(Producto producto);
 }

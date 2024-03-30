@@ -89,7 +89,7 @@ public class ProductoController {
         }
     }
 
-    @GetMapping("/-precio-stock")
+    @GetMapping("/precio-stock")
     public ResponseEntity<List<ProductoDto>> buscarProductoPorPrecioyStockMenorQue(@RequestParam("precioProducto") Double precioProducto, @RequestParam("stockProducto") Integer stockProducto){
             List<ProductoDto> productosEncontrados = productoService.productosConPrecioyStockMenorQue(precioProducto, stockProducto);
             return ResponseEntity.ok().body(productosEncontrados);

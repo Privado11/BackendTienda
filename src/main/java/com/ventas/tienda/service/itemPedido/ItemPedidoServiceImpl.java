@@ -80,14 +80,11 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     }
 
     @Override
-    public ItemPedidoDto buscarItemPedidoPorIdPedido(Long idPedido) throws NotFoundExceptionEntity {
-        ItemPedido itemPedidoE = itemPedidoRepository.findByPedido_IdPedido(idPedido);
-
-        if(Objects.isNull(idPedido)){
-            throw  new NotFoundExceptionEntity("ItemPedido no encontrado.");
-        }
-
-        return itemPedidoMapper.toDto(itemPedidoE);
+    public List<ItemPedidoDto> buscarItemPedidoPorIdPedido(Long idPedido){
+        return itemPedidoRepository.findByPedido_IdPedido(idPedido).
+                stream()
+                .map(itemPedido -> itemPedidoMapper.toDto(itemPedido))
+                .toList();
     }
 
     @Override

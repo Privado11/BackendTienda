@@ -1,5 +1,6 @@
 package com.ventas.tienda.dto.producto;
 
+import com.ventas.tienda.dto.itemPedido.ItemPedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 
 import java.util.Collections;
@@ -10,13 +11,13 @@ public record ProductoDto(
         String nombreProducto,
         Double precioProducto,
         Integer stockProducto,
-        List<PedidoDto> pedidos
+        List<ItemPedidoDto> itemPedidos
 ) {
 
-    public List<PedidoDto> pedidos(){
-        if(pedidos == null){
+    public List<ItemPedidoDto> itemPedidos(){
+        if(itemPedidos == null){
             return Collections.emptyList();
         }
-        return Collections.unmodifiableList(pedidos);
+        return Collections.unmodifiableList(itemPedidos);
     }
 }

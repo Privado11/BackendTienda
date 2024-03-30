@@ -142,16 +142,16 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarItemPedidoPorIdPedido() throws NotFoundExceptionEntity {
+    void buscarItemPedidoPorIdPedido(){
         Long idPedido = 1l;
+        List<ItemPedido> itemPedidoList = List.of(itemPedido, itemPedido2);
 
-        when(itemPedidoRepository.findByPedido_IdPedido(idPedido)).thenReturn(itemPedido);
+        when(itemPedidoRepository.findByPedido_IdPedido(idPedido)).thenReturn(itemPedidoList);
 
-        when(itemPedidoMapper.toDto(any())).thenReturn(itemPedidoDto);
 
-        ItemPedidoDto itemPedidoDtoE = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
+        List<ItemPedidoDto> itemPedidoDtoE = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
 
-        assertThat(itemPedidoDtoE).isNotNull();
+        assertThat(itemPedidoDtoE).isNotEmpty();
     }
 
     @Test

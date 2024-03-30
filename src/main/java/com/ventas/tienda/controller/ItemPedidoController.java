@@ -71,16 +71,12 @@ public class ItemPedidoController {
     }
 
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<ItemPedidoDto> getItemPedidoByIdPedido(@PathVariable("orderId") long idPedido){
-        try {
-            ItemPedidoDto itemPedidoDto = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
+    public ResponseEntity<List<ItemPedidoDto>> getItemPedidoByIdPedido(@PathVariable("orderId") long idPedido){
+            List<ItemPedidoDto> itemPedidoDto = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
             return ResponseEntity.ok().body(itemPedidoDto);
-        }catch (NotFoundExceptionEntity e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
-    @GetMapping("/product/")
+    @GetMapping("/product")
     public ResponseEntity<List<ItemPedidoDto>> getItemPedidoByIdProduct(@RequestParam("nameProduct") String nameProduct){
             List<ItemPedidoDto> itemPedidoDtoList = itemPedidoService.buscarItemPedidoPorNombreProducto(nameProduct);
             return ResponseEntity.ok().body(itemPedidoDtoList);

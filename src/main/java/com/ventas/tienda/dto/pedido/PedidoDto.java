@@ -13,10 +13,7 @@ public record PedidoDto(
         Long idPedido,
         LocalDateTime fechaPedido,
         String status,
-
         ClienteDto cliente,
-        PagoDto pago,
-        DetalleEnvioDto detalleEnvio,
         List<ItemPedidoDto> itemPedidos
 ) {
     public List<ItemPedidoDto> itemPedidos(){

@@ -21,6 +21,6 @@ public class Cliente {
     private String emailCliente;
     private String direccionCliente;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     List<Pedido> pedidosCliente;
 }

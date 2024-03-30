@@ -40,7 +40,7 @@ public class PagoServiceImpl implements PagoService {
                             pagoE.setFechaPago(pago.fechaPago());
                             pagoE.setMetodoPago(pago.metodoPago());
                             pagoE.setPedido(pago.pedido());
-                            pagoE.setTotalpago(pago.totalPago());
+                            pagoE.setTotalPago(pago.totalPago());
 
                             Pago pagoG = pagoRepository.save(pagoE);
 
