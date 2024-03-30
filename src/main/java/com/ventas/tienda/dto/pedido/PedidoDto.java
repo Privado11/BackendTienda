@@ -13,13 +13,17 @@ public record PedidoDto(
         Long idPedido,
         LocalDateTime fechaPedido,
         String status,
-        ClienteDto cliente,
-        List<ItemPedidoDto> itemPedidos
+        //ClienteDto cliente,
+        List<ItemPedidoDto> itemsPedido,
+
+        DetalleEnvioDto detalleEnvio,
+
+        PagoDto pago
 ) {
     public List<ItemPedidoDto> itemPedidos(){
-        if(itemPedidos == null){
+        if(itemsPedido == null){
             return Collections.emptyList();
         }
-        return Collections.unmodifiableList(itemPedidos);
+        return Collections.unmodifiableList(itemsPedido);
     }
 }

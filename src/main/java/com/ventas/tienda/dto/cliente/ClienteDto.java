@@ -10,13 +10,13 @@ public record ClienteDto(
         String nombreCliente,
         String emailCliente,
         String direccionCliente,
-        List<PedidoDto> pedidosClientes
+        List<PedidoDto> pedidosCliente
 ) {
 
     public List<PedidoDto> pedidosClientes(){
-        if (pedidosClientes == null) {
+        if (pedidosCliente() == null) {
             return Collections.emptyList();
         }
-        return Collections.unmodifiableList(pedidosClientes);
+        return Collections.unmodifiableList(pedidosCliente);
     }
 }

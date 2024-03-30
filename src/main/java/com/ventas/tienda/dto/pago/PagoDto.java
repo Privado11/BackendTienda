@@ -8,7 +8,6 @@ public record PagoDto(
         Long idPago,
         Double totalPago,
         LocalDateTime fechaPago,
-        String metodoPago,
-        PedidoDto pedido
+        String metodoPago
 ) {
 }

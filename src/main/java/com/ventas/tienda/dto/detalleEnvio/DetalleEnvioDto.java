@@ -6,7 +6,6 @@ public record DetalleEnvioDto(
         Long idDetalleEnvio,
         String direccionEnvio,
         String transportadoraEnvio,
-        String numeroGuiaEnvio,
-        PedidoDto pedido
+        String numeroGuiaEnvio
 ) {
 }

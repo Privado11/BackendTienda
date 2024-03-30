@@ -10,14 +10,14 @@ public record ProductoDto(
         Long idProducto,
         String nombreProducto,
         Double precioProducto,
-        Integer stockProducto,
-        List<ItemPedidoDto> itemPedidos
+        Integer stockProducto
+        //List<ItemPedidoDto> itemsPedidos
 ) {
 
-    public List<ItemPedidoDto> itemPedidos(){
-        if(itemPedidos == null){
+    /*public List<ItemPedidoDto> itemPedidos(){
+        if(itemsPedidos == null){
             return Collections.emptyList();
         }
-        return Collections.unmodifiableList(itemPedidos);
-    }
+        return Collections.unmodifiableList(itemsPedidos);
+    }*/
 }

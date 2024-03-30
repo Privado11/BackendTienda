@@ -8,7 +8,7 @@ public record ItemPedidoDto(
         Long idItemPedido,
         Integer cantidadItem,
         Double precio,
-        PedidoDto pedido,
+        //PedidoDto pedido,
         ProductoDto producto
 ) {
 }

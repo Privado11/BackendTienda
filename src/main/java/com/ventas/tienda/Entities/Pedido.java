@@ -28,7 +28,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido")
-    private List<ItemPedido> itemsPedidos;
+    private List<ItemPedido> itemsPedido;
 
     @OneToOne(mappedBy = "pedido")
     private Pago pago;
