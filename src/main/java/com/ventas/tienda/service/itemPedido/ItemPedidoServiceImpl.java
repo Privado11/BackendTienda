@@ -6,12 +6,14 @@ import com.ventas.tienda.Entities.Producto;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoDto;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoMapper;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ItemPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ItemPedidoServiceImpl implements ItemPedidoService {
@@ -54,9 +56,9 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     }
 
     @Override
-    public void removerItemPedido(Long idItemPedido) throws NotFoundExceptionEntity {
+    public void removerItemPedido(Long idItemPedido) throws NotAbleToDeleteException {
         ItemPedido itemPedidoE = itemPedidoRepository.findById(idItemPedido)
-                .orElseThrow(() -> new NotFoundExceptionEntity("ItemPedido no encontrado."));
+                .orElseThrow(() -> new NotAbleToDeleteException("ItemPedido no encontrado."));
         itemPedidoRepository.delete(itemPedidoE);
 
     }
@@ -78,11 +80,14 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     }
 
     @Override
-    public List<ItemPedidoDto> buscarItemPedidoPorIdPedido(Long idPedido) {
-        return itemPedidoRepository.findByPedido_IdPedido(idPedido)
-                .stream()
-                .map(itemPedido -> itemPedidoMapper.toDto(itemPedido))
-                .toList();
+    public ItemPedidoDto buscarItemPedidoPorIdPedido(Long idPedido) throws NotFoundExceptionEntity {
+        ItemPedido itemPedidoE = itemPedidoRepository.findByPedido_IdPedido(idPedido);
+
+        if(Objects.isNull(idPedido)){
+            throw  new NotFoundExceptionEntity("ItemPedido no encontrado.");
+        }
+
+        return itemPedidoMapper.toDto(itemPedidoE);
     }
 
     @Override

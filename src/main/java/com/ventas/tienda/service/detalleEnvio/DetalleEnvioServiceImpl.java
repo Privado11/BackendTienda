@@ -5,6 +5,7 @@ import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioMapper;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
 import com.ventas.tienda.exception.NotAbleToDeleteException;
+import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.DetalleEnvioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class DetalleEnvioServiceImpl implements DetalleEnvioService {
     }
 
     @Override
-    public DetalleEnvioDto actualizarDetalleEnvio(Long idDetalleEnvio, DetalleEnvioToSaveDto detalleEnvio) {
+    public DetalleEnvioDto actualizarDetalleEnvio(Long idDetalleEnvio, DetalleEnvioToSaveDto detalleEnvio) throws NotFoundExceptionEntity {
         return detalleEnvioRepository.findById(idDetalleEnvio)
                 .map(detalleEnvioE -> {
                             detalleEnvioE.setDireccionEnvio(detalleEnvio.direccionEnvio());
@@ -42,13 +43,13 @@ public class DetalleEnvioServiceImpl implements DetalleEnvioService {
                             DetalleEnvio detalleEnvioG = detalleEnvioRepository.save(detalleEnvioE);
 
                     return detalleEnvioMapper.toDto(detalleEnvioG);
-                }).orElseThrow(() -> new EntityNotFoundException("DetalleEnvio no encontrado."));
+                }).orElseThrow(() -> new NotFoundExceptionEntity("DetalleEnvio no encontrado."));
     }
 
     @Override
-    public DetalleEnvioDto buscarDetalleEnvioPorId(Long idDetalleEnvio) {
+    public DetalleEnvioDto buscarDetalleEnvioPorId(Long idDetalleEnvio) throws NotFoundExceptionEntity {
         DetalleEnvio detalleEnvioE = detalleEnvioRepository.findById(idDetalleEnvio)
-                .orElseThrow(() -> new EntityNotFoundException("DetalleEnvio no encontrado."));
+                .orElseThrow(() -> new NotFoundExceptionEntity("DetalleEnvio no encontrado."));
         return detalleEnvioMapper.toDto(detalleEnvioE);
     }
 
@@ -68,11 +69,14 @@ public class DetalleEnvioServiceImpl implements DetalleEnvioService {
     }
 
     @Override
-    public List<DetalleEnvioDto> buscarDetallesEnvioPorIdPedido(Long idPedido) {
-        return  detalleEnvioRepository.findByPedido_IdPedido(idPedido)
-                .stream()
-                .map(detalleEnvio -> detalleEnvioMapper.toDto(detalleEnvio))
-                .toList();
+    public DetalleEnvioDto buscarDetallesEnvioPorIdPedido(Long idPedido) throws NotFoundExceptionEntity {
+        DetalleEnvio detalleEnvioE =  detalleEnvioRepository.findByPedido_IdPedido(idPedido);
+
+        if(Objects.isNull(detalleEnvioE)){
+            throw new NotFoundExceptionEntity("DetalleEnvio no encontrado.");
+        }
+
+        return detalleEnvioMapper.toDto(detalleEnvioE);
     }
 
     @Override

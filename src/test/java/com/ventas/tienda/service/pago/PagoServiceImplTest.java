@@ -13,6 +13,7 @@ import com.ventas.tienda.Entities.Pago;
 import com.ventas.tienda.dto.pago.PagoDto;
 import com.ventas.tienda.dto.pago.PagoMapper;
 import com.ventas.tienda.dto.pago.PagoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.PagoRepository;
 import com.ventas.tienda.service.CreateEntytiesForTest;
@@ -102,7 +103,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerPago() throws NotFoundExceptionEntity {
+    void removerPago() throws NotAbleToDeleteException {
         Long idPago = 1l;
 
         when(pagoRepository.findById(idPago)).thenReturn(Optional.of(pago));
@@ -118,7 +119,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
 
         when(pagoRepository.findAll()).thenReturn(pagos);
 
-        List<PagoDto> pagoDtoList = pagoService.getAllItemPagos();
+        List<PagoDto> pagoDtoList = pagoService.getAllPagos();
 
         assertThat(pagoDtoList).isNotEmpty();
         assertThat(pagoDtoList).hasSize(2);
@@ -140,19 +141,15 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPagosPorIdOrdenYMetodoPago() {
+    void buscarPagosPorIdPedido() throws NotFoundExceptionEntity {
         Long idPedido = 1l;
-        String metodoPago = "Efectivo";
 
-        List<Pago> pagos = List.of(pago);
+        when(pagoRepository.findByPedido_IdPedido(idPedido)).thenReturn(pago);
 
-        when(pagoRepository.pagosPorIdOrdenYMetodoPago(idPedido, metodoPago)).thenReturn(pagos);
+        when(pagoMapper.toDto(any())).thenReturn(pagoDto);
 
-        List<PagoDto> pagoDtoList = pagoService.buscarPagosPorIdOrdenYMetodoPago(idPedido, metodoPago);
+        PagoDto pagoDto = pagoService.buscarPagosPorIdPedido(idPedido);
 
-        assertThat(pagoDtoList).isNotEmpty();
-        assertThat(pagoDtoList).hasSize(1);
-
-
+        assertThat(pagoDto).isNotNull();
     }
 }

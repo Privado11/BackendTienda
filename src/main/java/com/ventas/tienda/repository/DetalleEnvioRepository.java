@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DetalleEnvioRepository extends JpaRepository<DetalleEnvio, Long> {
-    List<DetalleEnvio> findByPedido_IdPedido(Long idPedido);
+    DetalleEnvio findByPedido_IdPedido(Long idPedido);
 
     List<DetalleEnvio> findByTransportadoraEnvioLike(String transportadora);
 

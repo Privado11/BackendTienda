@@ -74,14 +74,12 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void pagosPorIdOrdenYMetodoPago() {
+    void pagosPorIdPedido() {
         initcMockPagos();
-        String metodoPago = "Tarjeta de credito";
 
-        List<Pago> pagos = pagoRepository.pagosPorIdOrdenYMetodoPago(idPedido, metodoPago);
+        Pago pago = pagoRepository.findByPedido_IdPedido(idPedido);
 
-        System.out.println(pagos);
-        assertThat(pagos).isNotEmpty();
-        assertThat(pagos).hasSize(1);
+        System.out.println(pago);
+        assertThat(pago).isNotNull();
     }
 }

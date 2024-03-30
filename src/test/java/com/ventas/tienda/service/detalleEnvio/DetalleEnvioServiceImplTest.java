@@ -13,6 +13,7 @@ import com.ventas.tienda.Entities.DetalleEnvio;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioMapper;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
+import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.DetalleEnvioRepository;
 import com.ventas.tienda.service.CreateEntytiesForTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +68,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void actualizarDetalleEnvio() {
+    void actualizarDetalleEnvio() throws NotFoundExceptionEntity {
         Long idDetalle = 1l;
 
         DetalleEnvioToSaveDto detalleEnvioToSaveDto = new DetalleEnvioToSaveDto(
@@ -89,7 +90,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetalleEnvioPorId() {
+    void buscarDetalleEnvioPorId() throws NotFoundExceptionEntity {
         Long idDetalle = 1l;
 
         when(detalleEnvioRepository.findById(idDetalle)).thenReturn(Optional.of(detalleEnvio));
@@ -125,16 +126,16 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetallesEnvioPorIdPedido() {
+    void buscarDetallesEnvioPorIdPedido() throws NotFoundExceptionEntity {
         Long idPedido = 1l;
-        List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio);
 
-        when(detalleEnvioRepository.findByPedido_IdPedido(idPedido)).thenReturn(detalleEnvioList);
+        when(detalleEnvioRepository.findByPedido_IdPedido(idPedido)).thenReturn(detalleEnvio);
 
-        List<DetalleEnvioDto> detalleEnvioDtos = detalleEnvioService.buscarDetallesEnvioPorIdPedido(idPedido);
+        when(detalleEnvioMapper.toDto(any())).thenReturn(detalleEnvioDto);
 
-        assertThat(detalleEnvioDtos).isNotEmpty();
-        assertThat(detalleEnvioDtos).hasSize(1);
+        DetalleEnvioDto detalleEnvioDtos = detalleEnvioService.buscarDetallesEnvioPorIdPedido(idPedido);
+
+        assertThat(detalleEnvioDtos).isNotNull();
     }
 
     @Test
@@ -144,6 +145,8 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
         List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio);
 
         when(detalleEnvioRepository.findByTransportadoraEnvioLike(transportadora)).thenReturn(detalleEnvioList);
+
+        when(detalleEnvioMapper.toDto(any())).thenReturn(detalleEnvioDto);
 
         List<DetalleEnvioDto> detalleEnvioDtos = detalleEnvioService.buscarDetallesEnvioPorTransportadora(transportadora);
 

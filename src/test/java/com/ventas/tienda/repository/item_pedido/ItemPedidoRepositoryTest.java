@@ -95,11 +95,11 @@ class ItemPedidoRepositoryTest extends AbstractIntegrationBDTest {
     void findByPedido_IdPedido() {
         initcMockItemPedidos();
 
-        List<ItemPedido> itemPedidoList = itemPedidoRepository.findByPedido_IdPedido(idPedido);
+        ItemPedido itemPedido = itemPedidoRepository.findByPedido_IdPedido(idPedido);
 
-        System.out.println(itemPedidoList);
+        System.out.println(itemPedido);
 
-        assertThat(itemPedidoList).isNotEmpty();
+        assertThat(itemPedido).isNotNull();
     }
 
     @Test

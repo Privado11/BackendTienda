@@ -45,7 +45,7 @@ class ClienteServiceImplTest {
                 .idCliente(1l)
                 .nombreCliente("Walter Jiménez")
                 .emailCliente("privado@privado.com")
-                .direccionCLiente("Calle 29")
+                .direccionCliente("Calle 29")
                 .build();
 
 
@@ -53,14 +53,14 @@ class ClienteServiceImplTest {
                 .idCliente(2l)
                 .nombreCliente("Andrés Licona")
                 .emailCliente("privado2@privado.com")
-                .direccionCLiente("Calle 37")
+                .direccionCliente("Calle 37")
                 .build();
 
         cliente3 = Cliente.builder()
                 .idCliente(3l)
                 .nombreCliente("Walter Jiménez2")
                 .emailCliente("privado2@privado.com")
-                .direccionCLiente("Calle 29")
+                .direccionCliente("Calle 29")
                 .build();
 
         clienteDto = ClienteMapper.INSTANCE.toDto(cliente);
@@ -152,7 +152,7 @@ class ClienteServiceImplTest {
         List<Cliente> clientes = List.of(cliente, cliente3);
         String direccionCliente = "Calle 29";
 
-        when(clienteRepository.findByDireccionCLiente(any())).thenReturn(clientes);
+        when(clienteRepository.findByDireccionCliente(any())).thenReturn(clientes);
 
         List<ClienteDto> clienteDtos = clienteService.buscarClientesPorDireccion(direccionCliente);
 

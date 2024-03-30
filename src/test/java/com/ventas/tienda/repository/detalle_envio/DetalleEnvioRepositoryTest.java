@@ -69,10 +69,10 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     void findByPedido_IdPedido() {
         inictMockDetallesEnvio();
 
-        List<DetalleEnvio> detalleEnvioList = detalleEnvioRepository.findByPedido_IdPedido(idPedido);
+        DetalleEnvio detalleEnvioE = detalleEnvioRepository.findByPedido_IdPedido(idPedido);
 
-        System.out.println(detalleEnvioList);
-        assertThat(detalleEnvioList).isNotEmpty();
+        System.out.println(detalleEnvioE);
+        assertThat(detalleEnvioE).isNotNull();
     }
 
     @Test

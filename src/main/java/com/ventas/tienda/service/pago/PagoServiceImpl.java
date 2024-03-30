@@ -4,6 +4,7 @@ import com.ventas.tienda.Entities.Pago;
 import com.ventas.tienda.dto.pago.PagoDto;
 import com.ventas.tienda.dto.pago.PagoMapper;
 import com.ventas.tienda.dto.pago.PagoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.PagoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PagoServiceImpl implements PagoService {
@@ -56,15 +58,15 @@ public class PagoServiceImpl implements PagoService {
     }
 
     @Override
-    public void removerPago(Long idPago) throws NotFoundExceptionEntity {
+    public void removerPago(Long idPago) throws NotAbleToDeleteException {
         Pago pago = pagoRepository.findById(idPago).
-                orElseThrow(() -> new NotFoundExceptionEntity("Pago no encontrado."));
+                orElseThrow(() -> new NotAbleToDeleteException("Pago no encontrado."));
 
         pagoRepository.delete(pago);
     }
 
     @Override
-    public List<PagoDto> getAllItemPagos() {
+    public List<PagoDto> getAllPagos() {
         return pagoRepository.findAll()
                 .stream()
                 .map(pago -> pagoMapper.toDto(pago))
@@ -80,10 +82,12 @@ public class PagoServiceImpl implements PagoService {
     }
 
     @Override
-    public List<PagoDto> buscarPagosPorIdOrdenYMetodoPago(Long idPedido, String metodoPago) {
-        return pagoRepository.pagosPorIdOrdenYMetodoPago(idPedido, metodoPago)
-                .stream()
-                .map(pago -> pagoMapper.toDto(pago))
-                .toList();
+    public PagoDto buscarPagosPorIdPedido(Long idPedido) throws NotFoundExceptionEntity {
+        Pago pago = pagoRepository.findByPedido_IdPedido(idPedido);
+
+        if(Objects.isNull(pago)){
+            throw new NotFoundExceptionEntity("Pago no encontrado.");
+        }
+        return pagoMapper.toDto(pago);
     }
 }

@@ -14,6 +14,7 @@ import com.ventas.tienda.Entities.Producto;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoDto;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoMapper;
 import com.ventas.tienda.dto.itemPedido.ItemPedidoToSaveDto;
+import com.ventas.tienda.exception.NotAbleToDeleteException;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
 import com.ventas.tienda.repository.ItemPedidoRepository;
 import com.ventas.tienda.service.CreateEntytiesForTest;
@@ -104,7 +105,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerItemPedido() throws NotFoundExceptionEntity {
+    void removerItemPedido() throws NotAbleToDeleteException {
         Long idItem = 1l;
 
         when(itemPedidoRepository.findById(idItem)).thenReturn(Optional.of(itemPedido));
@@ -141,16 +142,16 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarItemPedidoPorIdPedido() {
+    void buscarItemPedidoPorIdPedido() throws NotFoundExceptionEntity {
         Long idPedido = 1l;
-        List<ItemPedido> itemPedidoList = List.of(itemPedido);
 
-        when(itemPedidoRepository.findByPedido_IdPedido(idPedido)).thenReturn(itemPedidoList);
+        when(itemPedidoRepository.findByPedido_IdPedido(idPedido)).thenReturn(itemPedido);
 
-        List<ItemPedidoDto> itemPedidoDtoList = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
+        when(itemPedidoMapper.toDto(any())).thenReturn(itemPedidoDto);
 
-        assertThat(itemPedidoDtoList).isNotEmpty();
-        assertThat(itemPedidoDtoList).hasSize(1);
+        ItemPedidoDto itemPedidoDtoE = itemPedidoService.buscarItemPedidoPorIdPedido(idPedido);
+
+        assertThat(itemPedidoDtoE).isNotNull();
     }
 
     @Test

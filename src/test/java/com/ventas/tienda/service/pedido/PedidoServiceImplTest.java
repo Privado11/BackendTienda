@@ -66,9 +66,9 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
         PedidoToSaveDto pedidoAGuardar = new PedidoToSaveDto(null,
                 LocalDateTime.of(2023, 04, 10, 4, 12),
-                clienteList().get(0),
-                pagoList().get(0),
-                detalleEnvioList().get(0));
+                "Enviado",
+                clienteList().get(0));
+
         when(pedidoMapper.pedidoToSaveDtoToEntity(pedidoAGuardar)).thenReturn(pedido);
 
         when(pedidoMapper.toDto(any())).thenReturn(pedidoDto);
@@ -84,9 +84,8 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
         PedidoToSaveDto pedidoA= new PedidoToSaveDto(null,
                 LocalDateTime.of(2023, 04, 10, 4, 12),
-                clienteList().get(1),
-                pagoList().get(1),
-                detalleEnvioList().get(1));
+                "Enviado",
+                clienteList().get(1));
 
         when(pedidoMapper.toDto(any())).thenReturn(pedidoDto);;
 
