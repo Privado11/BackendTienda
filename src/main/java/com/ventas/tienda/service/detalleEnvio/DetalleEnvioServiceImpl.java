@@ -1,6 +1,7 @@
 package com.ventas.tienda.service.detalleEnvio;
 
 import com.ventas.tienda.Entities.DetalleEnvio;
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioMapper;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
@@ -88,7 +89,7 @@ public class DetalleEnvioServiceImpl implements DetalleEnvioService {
     }
 
     @Override
-    public List<DetalleEnvioDto> buscarDetallesEnvioPorStatus(String status) {
+    public List<DetalleEnvioDto> buscarDetallesEnvioPorStatus(StatusPedido status) {
         return  detalleEnvioRepository.findByPedido_Status(status)
                 .stream()
                 .map(detalleEnvio -> detalleEnvioMapper.toDto(detalleEnvio))

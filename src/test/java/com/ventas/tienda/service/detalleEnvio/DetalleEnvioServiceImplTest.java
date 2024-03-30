@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 import com.ventas.tienda.Entities.DetalleEnvio;
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioMapper;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
@@ -156,7 +157,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
 
     @Test
     void buscarDetallesEnvioPorStatus() {
-        String statusPedido = "Enviado";
+        StatusPedido statusPedido = StatusPedido.ENVIADO;
 
         List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio);
 

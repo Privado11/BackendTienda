@@ -1,10 +1,8 @@
-package com.ventas.tienda.service;
+package com.ventas.tienda.dto;
 
 import com.ventas.tienda.Entities.*;
 import com.ventas.tienda.Enum.MetodoPago;
 import com.ventas.tienda.Enum.StatusPedido;
-import com.ventas.tienda.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;

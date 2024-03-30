@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -16,33 +18,39 @@ class ProductoMapperTest {
     @Autowired
     ProductoMapper productoMapper;
 
-
-
-    Producto producto = Producto.builder()
-            .nombreProducto("Laptop Hp Victus")
-            .precioProducto(2000.0)
-            .stockProducto(20)
-            .build();
-
-
-    Producto producto2 = Producto.builder()
-            .nombreProducto("Teclado Mecanico")
-            .precioProducto(300.0)
-            .stockProducto(15)
-            .build();
-
     @Test
     void toEntity() {
+        ProductoDto productoDto = new ProductoDto(1L, "Producto 1", 10.0, 100);
+        Producto producto = productoMapper.toEntity(productoDto);
+
+        assertThat(producto).isNotNull();
+        assertThat(productoDto.idProducto()).isEqualTo(producto.getIdProducto());
+        assertThat(productoDto.nombreProducto()).isEqualTo(producto.getNombreProducto());
+        assertThat(productoDto.precioProducto()).isEqualTo(producto.getPrecioProducto());
+        assertThat(productoDto.stockProducto()).isEqualTo(producto.getStockProducto());
     }
 
     @Test
     void productoToSaveDtoToEntity() {
+        ProductoSaveDto productoSaveDto = new ProductoSaveDto(null, "Nuevo Producto", 20.0, 50);
+        Producto producto = productoMapper.productoToSaveDtoToEntity(productoSaveDto);
+
+        assertThat(producto).isNotNull();
+        assertThat(productoSaveDto.nombreProducto()).isEqualTo(producto.getNombreProducto());
+        assertThat(productoSaveDto.precioProducto()).isEqualTo(producto.getPrecioProducto());
+        assertThat(productoSaveDto.stockProducto()).isEqualTo(producto.getStockProducto());
     }
 
     @Test
     void toDto() {
-        ProductoDto p = productoMapper.toDto(producto);
-        assertThat(p.nombreProducto()).isEqualTo("Laptop Hp Victus");
+        Producto producto = new Producto(1L, "Producto 1", 10.0, 100, Collections.emptyList());
+        ProductoDto productoDto = productoMapper.toDto(producto);
+
+        assertThat(productoDto).isNotNull();
+        assertThat(producto.getIdProducto()).isEqualTo(productoDto.idProducto());
+        assertThat(producto.getNombreProducto()).isEqualTo(productoDto.nombreProducto());
+        assertThat(producto.getPrecioProducto()).isEqualTo(productoDto.precioProducto());
+        assertThat(producto.getStockProducto()).isEqualTo(productoDto.stockProducto());
 
     }
 }

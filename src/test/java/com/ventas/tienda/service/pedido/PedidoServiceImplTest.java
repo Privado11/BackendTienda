@@ -3,6 +3,7 @@ package com.ventas.tienda.service.pedido;
 
 import com.ventas.tienda.Entities.Cliente;
 import com.ventas.tienda.Entities.Pedido;
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoMapper;
 import com.ventas.tienda.dto.pedido.PedidoToSaveDto;
@@ -40,19 +41,19 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     @BeforeEach
     void setUp() {
         pedido = Pedido.builder()
-                .status("pagado")
+                .status(StatusPedido.PENDIENTE)
                 .idPedido(2L)
                 .cliente(clienteList().get(0))
                 .build();
 
         pedido2 = Pedido.builder()
-                .status("pendiente")
+                .status(StatusPedido.ENVIADO)
                 .cliente(clienteList().get(1))
                 .idPedido(2L)
                 .build();
 
         pedido3 = Pedido.builder()
-                .status("activo")
+                .status(StatusPedido.ENTREGADO)
                 .idPedido(2L)
                 .cliente(clienteList().get(0))
                 .build();
@@ -66,7 +67,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
         PedidoToSaveDto pedidoAGuardar = new PedidoToSaveDto(null,
                 LocalDateTime.of(2023, 04, 10, 4, 12),
-                "Enviado",
+                StatusPedido.ENVIADO,
                 clienteList().get(0));
 
         when(pedidoMapper.pedidoToSaveDtoToEntity(pedidoAGuardar)).thenReturn(pedido);
@@ -84,7 +85,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
 
         PedidoToSaveDto pedidoA= new PedidoToSaveDto(null,
                 LocalDateTime.of(2023, 04, 10, 4, 12),
-                "Enviado",
+                StatusPedido.ENVIADO,
                 clienteList().get(1));
 
         when(pedidoMapper.toDto(any())).thenReturn(pedidoDto);;
@@ -141,7 +142,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     @Test
     void buscarPedidoPorClienteYStatus() {
         Cliente cliente = clienteList().get(0);
-        String statusPedido = "pagado";
+        StatusPedido statusPedido = StatusPedido.PENDIENTE;
         List<Pedido> pedidos = List.of(pedido);
 
         when(pedidoRepository.findByClienteAndStatus(cliente, statusPedido)).thenReturn(pedidos);

@@ -1,6 +1,8 @@
 package com.ventas.tienda.repository;
 
 import com.ventas.tienda.Entities.*;
+import com.ventas.tienda.Enum.MetodoPago;
+import com.ventas.tienda.Enum.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -47,7 +49,7 @@ public abstract class CreacionDeEntidadesParaTest{
         List<Cliente> clientes = clienteList();
         Pedido pedido = Pedido.builder()
                 .fechaPedido(LocalDateTime.now())
-                .status("Enviado")
+                .status(StatusPedido.ENVIADO)
                 .cliente(clientes.get(0))
                 .detalleEnvio(detalleEnvioList().get(0))
                 .build();
@@ -55,7 +57,7 @@ public abstract class CreacionDeEntidadesParaTest{
 
         Pedido pedido2 = Pedido.builder()
                 .fechaPedido(LocalDateTime.now())
-                .status("Pendiente")
+                .status(StatusPedido.PENDIENTE)
                 .cliente(clientes.get(1))
                 .detalleEnvio(detalleEnvioList().get(1))
                 .build();
@@ -114,12 +116,12 @@ public abstract class CreacionDeEntidadesParaTest{
     public List<Pago> pagoList(){
         Pago pago = Pago.builder()
                 .fechaPago(LocalDateTime.now())
-                .metodoPago("Efectivo")
+                .metodoPago(MetodoPago.EFECTIVO)
                 .build();
 
         Pago pago2 = Pago.builder()
                 .fechaPago(LocalDateTime.now())
-                .metodoPago("Tarjeta")
+                .metodoPago(MetodoPago.TARJETA_CREDITO)
                 .build();
 
         return  pagoRepository.saveAll(List.of(pago, pago2));

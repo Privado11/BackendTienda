@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 import com.ventas.tienda.Entities.Pago;
+import com.ventas.tienda.Enum.MetodoPago;
 import com.ventas.tienda.dto.pago.PagoDto;
 import com.ventas.tienda.dto.pago.PagoMapper;
 import com.ventas.tienda.dto.pago.PagoToSaveDto;
@@ -57,7 +58,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
                 null,
                 50000.0,
                 LocalDateTime.now(),
-                "Efectivo",
+                MetodoPago.EFECTIVO,
                 pedidosList().get(0)
                 );
         when(pagoRepository.save(any())).thenReturn(pago);
@@ -76,7 +77,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
                 null,
                 50000.0,
                 LocalDateTime.now(),
-                "Efectivo",
+                MetodoPago.EFECTIVO,
                 pedidosList().get(0)
         );
         when(pagoRepository.findById(idPago)).thenReturn(Optional.of(pago));

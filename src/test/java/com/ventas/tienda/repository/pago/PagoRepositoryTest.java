@@ -1,6 +1,7 @@
 package com.ventas.tienda.repository.pago;
 
 import com.ventas.tienda.Entities.Pago;
+import com.ventas.tienda.Enum.MetodoPago;
 import com.ventas.tienda.repository.AbstractIntegrationBDTest;
 import com.ventas.tienda.repository.PagoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     void initcMockPagos(){
         Pago pago = Pago.builder()
                 .fechaPago(LocalDateTime.of(2023, 04, 10, 4, 12))
-                .metodoPago("Tarjeta de credito")
+                .metodoPago(MetodoPago.TARJETA_CREDITO)
                 .pedido(pedidosList().get(0))
                 .build();
         idPedido = pago.getPedido().getIdPedido();
@@ -33,7 +34,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
 
         Pago pago2 = Pago.builder()
                 .fechaPago(LocalDateTime.of(2024, 04, 10, 4, 12))
-                .metodoPago("Tarjeta debito")
+                .metodoPago(MetodoPago.DAVIPLATA)
                 .pedido(pedidosList().get(1))
                 .build();
 
@@ -50,7 +51,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     void guardarPago(){
         Pago pago = Pago.builder()
                 .fechaPago(LocalDateTime.of(2022, 04, 10, 4, 12))
-                .metodoPago("Efectivo")
+                .metodoPago(MetodoPago.EFECTIVO)
                 .build();
 
         Pago pagoGuardado = pagoRepository.save(pago);

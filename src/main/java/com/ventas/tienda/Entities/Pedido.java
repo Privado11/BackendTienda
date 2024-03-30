@@ -1,5 +1,6 @@
 package com.ventas.tienda.Entities;
 
+import com.ventas.tienda.Enum.StatusPedido;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,13 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPedido;
+
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaPedido;
-    private String status;
+
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")

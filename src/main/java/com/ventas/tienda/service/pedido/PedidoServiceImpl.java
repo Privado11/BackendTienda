@@ -4,6 +4,7 @@ import com.ventas.tienda.Entities.Cliente;
 import com.ventas.tienda.Entities.Pago;
 import com.ventas.tienda.Entities.Pedido;
 
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoMapper;
 import com.ventas.tienda.dto.pedido.PedidoToSaveDto;
@@ -78,7 +79,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoDto> buscarPedidoPorClienteYStatus(Cliente cliente, String status) {
+    public List<PedidoDto> buscarPedidoPorClienteYStatus(Cliente cliente, StatusPedido status) {
         return pedidoRepository.findByClienteAndStatus(cliente, status)
                 .stream()
                 .map(pedido -> pedidoMapper.toDto(pedido))

@@ -1,5 +1,6 @@
 package com.ventas.tienda.service.detalleEnvio;
 
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
 import com.ventas.tienda.exception.NotFoundExceptionEntity;
@@ -16,5 +17,5 @@ public interface DetalleEnvioService {
 
     DetalleEnvioDto buscarDetallesEnvioPorIdPedido(Long idPedido) throws NotFoundExceptionEntity;
     List<DetalleEnvioDto> buscarDetallesEnvioPorTransportadora(String transportadora);
-    List<DetalleEnvioDto> buscarDetallesEnvioPorStatus(String status);
+    List<DetalleEnvioDto> buscarDetallesEnvioPorStatus(StatusPedido status);
 }

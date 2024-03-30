@@ -1,5 +1,6 @@
 package com.ventas.tienda.controller;
 
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioDto;
 import com.ventas.tienda.dto.detalleEnvio.DetalleEnvioToSaveDto;
 import com.ventas.tienda.exception.NotAbleToDeleteException;
@@ -89,7 +90,7 @@ public class DetalleEnvioController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<List<DetalleEnvioDto>> getDetallesenvioByStatusOrder(@RequestParam("statusOrder") String status){
+    public ResponseEntity<List<DetalleEnvioDto>> getDetallesenvioByStatusOrder(@RequestParam("statusOrder") StatusPedido status){
         List<DetalleEnvioDto> detalleEnvioDtoList = detalleEnvioService.buscarDetallesEnvioPorStatus(status);
         detalleEnvioDtoList.forEach(detalleEnvioDto -> logger.info(detalleEnvioDto.toString()));
         return ResponseEntity.ok().body(detalleEnvioDtoList);

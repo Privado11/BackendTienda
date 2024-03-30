@@ -2,6 +2,7 @@ package com.ventas.tienda.service.pedido;
 
 import com.ventas.tienda.Entities.Cliente;
 import com.ventas.tienda.Entities.Pedido;
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.dto.pedido.PedidoDto;
 import com.ventas.tienda.dto.pedido.PedidoToSaveDto;
 import com.ventas.tienda.exception.NotAbleToDeleteException;
@@ -19,7 +20,7 @@ public interface PedidoService {
 
     List<PedidoDto> buscarPedidosEntreFechas(LocalDateTime fechaInicial, LocalDateTime fechaFinal);
 
-    List<PedidoDto> buscarPedidoPorClienteYStatus(Cliente cliente, String status);
+    List<PedidoDto> buscarPedidoPorClienteYStatus(Cliente cliente, StatusPedido status);
 
     List<PedidoDto> BuscarPedidosyItemsPorCliente(Long idCliente);
 }

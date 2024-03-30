@@ -1,5 +1,6 @@
 package com.ventas.tienda.Entities;
 
+import com.ventas.tienda.Enum.MetodoPago;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +19,14 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
     private Double totalPago;
+
+
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaPago;
-    private String metodoPago;
+
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    private MetodoPago metodoPago;
 
     @OneToOne
     @JoinColumn(name = "id_pedido")

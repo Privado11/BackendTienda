@@ -1,6 +1,7 @@
 package com.ventas.tienda.repository.detalle_envio;
 
 import com.ventas.tienda.Entities.DetalleEnvio;
+import com.ventas.tienda.Enum.StatusPedido;
 import com.ventas.tienda.repository.AbstractIntegrationBDTest;
 import com.ventas.tienda.repository.DetalleEnvioRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -89,7 +90,7 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     @Test
     void findByPedido_Status() {
         inictMockDetallesEnvio();
-        String statusPedido = "Enviado";
+        StatusPedido statusPedido = StatusPedido.ENVIADO;
 
         List<DetalleEnvio> detalleEnvioList = detalleEnvioRepository.findByPedido_Status(statusPedido);
 
