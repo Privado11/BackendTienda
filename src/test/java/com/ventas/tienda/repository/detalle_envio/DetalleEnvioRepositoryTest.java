@@ -51,7 +51,7 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarDetalleEnvio(){
+    void givenDetallesEnvio_whenGuardarDetalleEnvio_thenDetalleEnvioGuardado(){
         DetalleEnvio detalleEnvio = DetalleEnvio.builder()
                 .transportadoraEnvio("Coordinadora")
                 .numeroGuiaEnvio("ACS34423")
@@ -67,7 +67,7 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByPedido_IdPedido() {
+    void givenDetallesEnvio_whenFindByPedido_IdPedido_thenReturnDetalleEnvioForPedido() {
         inictMockDetallesEnvio();
 
         DetalleEnvio detalleEnvioE = detalleEnvioRepository.findByPedido_IdPedido(idPedido);
@@ -77,7 +77,7 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByTransportadoraEnvioLike() {
+    void givenDetallesEnvio_whenFindByTransportadoraEnvioLike_thenReturnListOfDetalleEnvio(){
         inictMockDetallesEnvio();
         String transportadoraEnvio = "Coordinadora";
 
@@ -88,7 +88,7 @@ class DetalleEnvioRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByPedido_Status() {
+    void givenDetallesEnvio_whenFindByPedido_Status_thenReturnListOfDetalleEnvio() {
         inictMockDetallesEnvio();
         StatusPedido statusPedido = StatusPedido.ENVIADO;
 

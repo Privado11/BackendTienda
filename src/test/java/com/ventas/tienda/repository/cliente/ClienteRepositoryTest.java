@@ -45,7 +45,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarCliente(){
+    void givenClientes_whenGuardarCliente_thenClienteGuardado(){
         Cliente cliente = Cliente.builder()
                 .nombreCliente("Walter Jiménez")
                 .emailCliente("privado3@privado.com")
@@ -62,7 +62,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
 
 
     @Test
-    void findByEmailCliente() {
+    void givenAnCliente_whenFindByEmailCliente_thenReturnCliente() {
         inictMockCliente();
         String clienteEmail = "privado6@privado.com";
 
@@ -75,7 +75,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByDireccionCLiente() {
+    void givenClientes_whenFindByDireccionCliente_thenReturnListOfClientes() {
         inictMockCliente();
         String direccionCliente = "Calle 37";
 
@@ -87,7 +87,7 @@ class ClienteRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void buscarClientesQueComiencenPor() {
+    void givenClientes_whenBuscarClientesQueComiencenPor_thenReturnListOfClientes() {
         inictMockCliente();
         String nombreCliente = "Walter";
 

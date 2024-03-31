@@ -48,7 +48,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarPago(){
+    void givenPagos_whenGuardarPago_thenPagoGuardado(){
         Pago pago = Pago.builder()
                 .fechaPago(LocalDateTime.of(2022, 04, 10, 4, 12))
                 .metodoPago(MetodoPago.EFECTIVO)
@@ -62,7 +62,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void pagosEntreFechas() {
+    void givenPagos_whenPagosEntreFechas_thenReturnListOfPagos() {
         initcMockPagos();
         LocalDateTime fechaI = LocalDateTime.of(2023, 01, 10, 4, 12);
         LocalDateTime fechaF = LocalDateTime.of(2023, 12, 10, 4, 12);
@@ -75,7 +75,7 @@ class PagoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void pagosPorIdPedido() {
+    void givenPagos_whenPagosPorIdPedido_thenReturnPagoForPedido() {
         initcMockPagos();
 
         Pago pago = pagoRepository.findByPedido_IdPedido(idPedido);

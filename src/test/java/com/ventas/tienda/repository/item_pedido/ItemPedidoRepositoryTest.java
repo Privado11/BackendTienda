@@ -64,7 +64,7 @@ class ItemPedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarItemPedido() {
+    void givenItemPedidos_whenGuardarItemPedido_thenItemPedidoGuardado() {
         ItemPedido itemPedido = ItemPedido.builder()
                 .producto(productosList().get(1))
                 .cantidadItem(20)
@@ -79,7 +79,7 @@ class ItemPedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByProducto_NombreProductoLike() {
+    void givenItemPedidos_whenFindByProducto_NombreProductoLike_thenReturnListOfItemPedidos() {
         initcMockItemPedidos();
         String nombreProducto = productosList().get(0).getNombreProducto();
 
@@ -92,7 +92,7 @@ class ItemPedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByPedido_IdPedido() {
+    void givenItemPedidos_whenFindByPedido_IdPedido_thenReturnListOfItemPedidosForPedido() {
         initcMockItemPedidos();
 
         List<ItemPedido> itemPedido = itemPedidoRepository.findByPedido_IdPedido(idPedido);
@@ -103,7 +103,7 @@ class ItemPedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void sumaTotalVentasProducto() {
+    void givenItemPedidos_whenSumaTotalVentasProducto_thenReturnTotalSalesForProduct() {
         initcMockItemPedidos();
 
         Double totalVentasProducto = itemPedidoRepository.sumaTotalVentasProducto(producto);

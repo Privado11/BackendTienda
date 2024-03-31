@@ -60,7 +60,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void guardarProducto() {
+    void givenProductoService_whenGuardarProducto_thenReturnProductoGuardado() {
 
        when(productoRepository.save(any())).thenReturn(producto);
 
@@ -77,7 +77,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void actualizarProducto() throws NotFoundExceptionEntity {
+    void givenProductoService_whenActualizarProducto_thenReturnProductoActualizado() throws NotFoundExceptionEntity {
         when(productoRepository.findById(any())).thenReturn(Optional.of(producto));
         ProductoSaveDto productoT = new ProductoSaveDto(null, "Laptop Hp Victus", 2500.0, 15);
 
@@ -92,7 +92,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void buscarProductoPorId() throws NotFoundExceptionEntity {
+    void givenProductoService_whenBuscarProductoPorId_thenReturnProducto() throws NotFoundExceptionEntity {
         Long idProducto = 1l;
 
         when(productoRepository.findById(idProducto)).thenReturn(Optional.of(producto));
@@ -105,7 +105,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void removerProducto() throws NotAbleToDeleteException {
+    void givenProductoService_whenRemoverProducto_thenReturnMensaje() throws NotAbleToDeleteException {
         Long idProducto = 1l;
 
         when(productoRepository.findById(idProducto)).thenReturn(Optional.of(producto));
@@ -116,7 +116,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void getAllProductos() {
+    void givenProductoService_whenGetAllProductos_thenReturnListOfProductos() {
         List<Producto> productos = List.of(producto, producto2);
 
         when(productoRepository.findAll()).thenReturn(productos);
@@ -129,7 +129,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void buscarProductoPornombre() throws NotFoundExceptionEntity {
+    void givenProductoService_whenBuscarProductoPorNombre_thenReturnProducto() throws NotFoundExceptionEntity {
         String nombreProducto = "Laptop Hp Victus";
 
         when(productoRepository.findByNombreProducto(any())).thenReturn(producto);
@@ -143,7 +143,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void productosEnStock() {
+    void givenProductoService_whenProductosEnStock_thenReturnListOfProductos() {
         List<Producto> productos = List.of(producto, producto2);
 
         when(productoRepository.productosEnStock()).thenReturn(productos);
@@ -156,7 +156,7 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void productosConPrecioyStockMenorQue() {
+    void givenProductoService_whenProductosConPrecioyStockMenorQue_thenReturnListOfProductos(){
         Double precio = 2000.0;
         Integer stock = 10;
 

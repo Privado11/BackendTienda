@@ -51,7 +51,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void guardarItemPedido() {
+    void givenItemPedidoService_whenGuardarItemPedido_thenReturnItemPedidoGuardado() {
         when(itemPedidoRepository.save(any())).thenReturn(itemPedido);
 
         ItemPedidoToSaveDto itemPedidoToSaveDto = new ItemPedidoToSaveDto(
@@ -70,7 +70,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void actualizarItemPedido() throws NotFoundExceptionEntity {
+    void givenItemPedidoService_whenActualizarItemPedido_thenReturnItemPedidoActualizado() throws NotFoundExceptionEntity {
         Long idItem = 1l;
 
         ItemPedidoToSaveDto itemPedidoToSaveDto = new ItemPedidoToSaveDto(
@@ -92,7 +92,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarItemPedidoPorId() throws NotFoundExceptionEntity {
+    void givenItemPedidoService_whenBuscarItemPedidoPorId_thenReturnItemPedidoEncontrado() throws NotFoundExceptionEntity {
         Long idItem = 1l;
 
         when(itemPedidoRepository.findById(idItem)).thenReturn(Optional.of(itemPedido));
@@ -105,7 +105,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerItemPedido() throws NotAbleToDeleteException {
+    void givenItemPedidoService_whenRemoverItemPedido_thenItemPedidoMensaje() throws NotAbleToDeleteException {
         Long idItem = 1l;
 
         when(itemPedidoRepository.findById(idItem)).thenReturn(Optional.of(itemPedido));
@@ -116,7 +116,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void getAllItemPedidos() {
+    void givenItemPedidoService_whenGetAllItemPedidos_thenReturnListOfItemPedidos() {
         List<ItemPedido> itemPedidoList = List.of(itemPedido, itemPedido2);
 
         when(itemPedidoRepository.findAll()).thenReturn(itemPedidoList);
@@ -128,7 +128,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarItemPedidoPorNombreProducto() {
+    void givenItemPedidoService_whenBuscarItemPedidoPorNombreProducto_thenReturnListOfItemPedidos() {
         String nombreProducto = "Laptop Hp Victus";
         List<ItemPedido> itemPedidoList = List.of(itemPedido);
 
@@ -142,7 +142,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarItemPedidoPorIdPedido(){
+    void givenItemPedidoService_whenBuscarItemPedidoPorIdPedido_thenReturnListOfItemPedidos(){
         Long idPedido = 1l;
         List<ItemPedido> itemPedidoList = List.of(itemPedido, itemPedido2);
 
@@ -155,7 +155,7 @@ class ItemPedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void sumaVentasProducto() {
+    void givenItemPedidoService_whenSumaVentasProducto_thenReturnTotalVenta() {
         Producto producto = productosList().get(0);
 
         when(itemPedidoRepository.sumaTotalVentasProducto(producto)).thenReturn(itemPedido.getPrecio() * 10);

@@ -54,7 +54,7 @@ class PedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarPedido(){
+    void givenAnPedido_whenSave_thenPedidowithId(){
         Pedido pedido3 = Pedido.builder()
                 .status(StatusPedido.PENDIENTE)
                 .fechaPedido(LocalDateTime.now())
@@ -68,7 +68,7 @@ class PedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void pedidosEntreFechas() {
+    void givenPedidos_whenPedidosEntreFechas_thenReturnListOfPedidos() {
         inictMockPedidos();
         LocalDateTime fechaI = LocalDateTime.of(2023, 01, 10, 4, 12);
         LocalDateTime fechaF = LocalDateTime.of(2023, 12, 10, 4, 12);
@@ -81,7 +81,7 @@ class PedidoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findByClienteAndStatus() {
+    void givenPedidos_whenFindByClienteAndStatus_thenReturnListOfPedidosMatchingCriterio() {
         inictMockPedidos();
         Cliente cliente = clientes.get(0);
         StatusPedido status = StatusPedido.ENVIADO;
@@ -95,7 +95,7 @@ class PedidoRepositoryTest extends AbstractIntegrationBDTest {
 
 
     @Test
-    void pedidosyItemsPorCliente() {
+    void givenPedidos_whenPedidosyItemsPorCliente_thenReturnListOfPedidosAndItemsForClient() {
         inictMockPedidos();
         Long idCliente = clientes.get(0).getIdCliente();
 

@@ -62,7 +62,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void guardarPedido() {
+    void givenPedidoService_whenGuardarPedido_thenReturnPedidoGuardado(){
         when(pedidoRepository.save(any())).thenReturn(pedido);
 
         PedidoToSaveDto pedidoAGuardar = new PedidoToSaveDto(null,
@@ -80,7 +80,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void actualizarPedido() throws NotFoundExceptionEntity {
+    void givenPedidoService_whenActualizarPedido_thenReturnPedidoActualizado() throws NotFoundExceptionEntity {
         when(pedidoRepository.findById(any())).thenReturn(Optional.of(pedido2));
 
         PedidoToSaveDto pedidoA= new PedidoToSaveDto(null,
@@ -96,7 +96,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPedidoPorId() throws NotFoundExceptionEntity{
+    void givenPedidoService_whenBuscarPedidoPorId_thenReturnPedidoEncontrado() throws NotFoundExceptionEntity{
         when(pedidoRepository.findById(any())).thenReturn(Optional.of(pedido3));
 
         when(pedidoMapper.toDto(any())).thenReturn(pedidoDto);
@@ -107,7 +107,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerPedido() throws NotAbleToDeleteException {
+    void givenPedidoService_whenRemoverPedido_thenReturnPedidoRemovido() throws NotAbleToDeleteException {
         Long idPedido = 1l;
         when(pedidoRepository.findById(idPedido)).thenReturn(Optional.of(pedido));
         pedidoService.removerPedido(idPedido);
@@ -116,7 +116,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void getAllItemPedidos() {
+    void givenPedidoService_whenGetAllPedidos_thenReturnListOfPedidos() {
         List<Pedido> pedidos = List.of(pedido, pedido2, pedido3);
 
         when(pedidoRepository.findAll()).thenReturn(pedidos);
@@ -128,7 +128,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPedidosEntreFechas(){
+    void givenPedidoService_whenBuscarPedidosEntreFechas_thenReturnListOfPedidos(){
         List<Pedido> pedidos = List.of(pedido, pedido);
 
         when(pedidoRepository.pedidosEntreFechas(any(), any())).thenReturn(pedidos);
@@ -140,7 +140,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPedidoPorClienteYStatus() {
+    void givenPedidoService_whenBuscarPedidoPorClienteYStatus_thenReturnListOfPedidos() {
         Cliente cliente = clienteList().get(0);
         StatusPedido statusPedido = StatusPedido.PENDIENTE;
         List<Pedido> pedidos = List.of(pedido);
@@ -153,7 +153,7 @@ class PedidoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPedidosyItemsPorCliente() {
+    void givenPedidoService_whenBuscarPedidosyItemsPorCliente_thenReturnListOfPedidos() {
         Long idCliente = clienteList().get(0).getIdCliente();
 
         List<Pedido> pedidos = List.of(pedido);

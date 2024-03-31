@@ -60,7 +60,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePedido(@PathVariable("id") Long idClienteo){
+    public ResponseEntity<String> deleteCliente(@PathVariable("id") Long idClienteo){
         try {
             clienteService.removercliente(idClienteo);
             return ResponseEntity.ok().body("Cliente eliminado.");

@@ -44,7 +44,7 @@ class ProductoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void guardarProducto() {
+    void givenAnProduct_whenSave_thenProductwithId() {
         //Given
         Producto producto = Producto.builder()
                 .nombreProducto("Laptop Lenovo Legion")
@@ -59,7 +59,7 @@ class ProductoRepositoryTest extends AbstractIntegrationBDTest {
         assertThat(productoGuardado).isNotNull();
     }
     @Test
-    void findByNombreProducto() {
+    void givenProducts_whenGetByNameProduct_thenReturnListOfProducts() {
         initMockProductos();
         String nombre = "Teclado Mecanico";
 
@@ -71,7 +71,7 @@ class ProductoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void productosEnStock() {
+    void givenProducts_whenProductosEnStock_thenReturnListOfProductsInStock() {
         initMockProductos();
         List<Producto> productosEnStock = productoRepository.productosEnStock();
 
@@ -81,7 +81,7 @@ class ProductoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void productosConPrecioyStockMenorQue() {
+    void givenProducts_whenProductosConPrecioyStockMenorQue_thenReturnListOfProductsMatchingCriterio() {
         initMockProductos();
         Double precio = 2000.0;
         Integer stock = 15;
@@ -92,7 +92,7 @@ class ProductoRepositoryTest extends AbstractIntegrationBDTest {
     }
 
     @Test
-    void findAll() {
+    void givenProducts_whenFindAll_thenReturnAllProducts(){
         initMockProductos();
         List<Producto> productos = productoRepository.findAll();
         System.out.println(productos);

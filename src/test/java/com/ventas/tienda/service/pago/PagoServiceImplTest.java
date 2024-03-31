@@ -53,7 +53,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void guardarPago() {
+    void givenPagoService_whenGuardarPago_thenReturnPagoGuardado() {
         PagoToSaveDto pagoToSaveDto = new PagoToSaveDto(
                 null,
                 50000.0,
@@ -71,7 +71,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void actualizarPago() throws NotFoundExceptionEntity {
+    void givenPagoService_whenActualizarPago_thenReturnPagoActualizado() throws NotFoundExceptionEntity {
         Long idPago = 1l;
         PagoToSaveDto pagoToSaveDto = new PagoToSaveDto(
                 null,
@@ -92,7 +92,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPagoPorId() throws NotFoundExceptionEntity {
+    void givenPagoService_whenBuscarPagoPorId_thenReturnPagoEncontrado() throws NotFoundExceptionEntity {
         Long idPago = 1l;
         when(pagoRepository.findById(idPago)).thenReturn(Optional.of(pago));
 
@@ -104,7 +104,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerPago() throws NotAbleToDeleteException {
+    void givenPagoService_whenRemoverPago_thenReturnPagoRemovido() throws NotAbleToDeleteException {
         Long idPago = 1l;
 
         when(pagoRepository.findById(idPago)).thenReturn(Optional.of(pago));
@@ -115,7 +115,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void getAllItemPagos() {
+    void givenPagoService_whenGetAllPagos_thenReturnListOfPagos() {
         List<Pago> pagos = List.of(pago, pago1);
 
         when(pagoRepository.findAll()).thenReturn(pagos);
@@ -127,7 +127,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarpagosEntreFechas() {
+    void givenPagoService_whenBuscarPagosEntreFechas_thenReturnListOfPagos() {
         LocalDateTime fechaInicial = LocalDateTime.of(2023, 12, 31,4 ,0);
         LocalDateTime fechaFinal = LocalDateTime.now();
 
@@ -142,7 +142,7 @@ class PagoServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarPagosPorIdPedido() throws NotFoundExceptionEntity {
+    void givenPagoService_whenBuscarPagosPorIdPedido_thenReturnPagoEncontrado() throws NotFoundExceptionEntity {
         Long idPedido = 1l;
 
         when(pagoRepository.findByPedido_IdPedido(idPedido)).thenReturn(pago);

@@ -50,7 +50,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void guardarDetalleEnvio() {
+    void givenDetalleEnvioService_whenGuardarDetalleEnvio_thenReturnDetalleEnvioGuardado() {
         when(detalleEnvioRepository.save(any())).thenReturn(detalleEnvio);
 
         DetalleEnvioToSaveDto detalleEnvioToSaveDto = new DetalleEnvioToSaveDto(
@@ -69,7 +69,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void actualizarDetalleEnvio() throws NotFoundExceptionEntity {
+    void givenDetalleEnvioService_whenActualizarDetalleEnvio_thenReturnDetalleEnvioActualizado() throws NotFoundExceptionEntity {
         Long idDetalle = 1l;
 
         DetalleEnvioToSaveDto detalleEnvioToSaveDto = new DetalleEnvioToSaveDto(
@@ -91,7 +91,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetalleEnvioPorId() throws NotFoundExceptionEntity {
+    void givenDetalleEnvioService_whenBuscarDetalleEnvioPorId_thenReturnDetalleEnvioEncontrado() throws NotFoundExceptionEntity {
         Long idDetalle = 1l;
 
         when(detalleEnvioRepository.findById(idDetalle)).thenReturn(Optional.of(detalleEnvio));
@@ -104,7 +104,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void removerDetalleEnvio() {
+    void givenDetalleEnvioService_whenRemoverDetalleEnvio_thenMensaje(){
         Long idDetalle = 1l;
 
         when(detalleEnvioRepository.findById(idDetalle)).thenReturn(Optional.of(detalleEnvio));
@@ -115,7 +115,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void getAllDetalleEnvio() {
+    void givenDetalleEnvioService_whenGetAllDetalleEnvio_thenReturnListOfDetalleEnvio() {
         List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio, detalleEnvio2);
 
         when(detalleEnvioRepository.findAll()).thenReturn(detalleEnvioList);
@@ -127,7 +127,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetallesEnvioPorIdPedido() throws NotFoundExceptionEntity {
+    void givenDetalleEnvioService_whenBuscarDetallesEnvioPorIdPedido_thenReturnDetalleEnvioEncontrado() throws NotFoundExceptionEntity {
         Long idPedido = 1l;
 
         when(detalleEnvioRepository.findByPedido_IdPedido(idPedido)).thenReturn(detalleEnvio);
@@ -140,7 +140,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetallesEnvioPorTransportadora() {
+    void givenDetalleEnvioService_whenBuscarDetallesEnvioPorTransportadora_thenReturnListOfDetalleEnvio() {
         String transportadora = "coordinadora";
 
         List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio);
@@ -156,7 +156,7 @@ class DetalleEnvioServiceImplTest extends CreateEntytiesForTest {
     }
 
     @Test
-    void buscarDetallesEnvioPorStatus() {
+    void givenDetalleEnvioService_whenBuscarDetallesEnvioPorStatus_thenReturnListOfDetalleEnvio() {
         StatusPedido statusPedido = StatusPedido.ENVIADO;
 
         List<DetalleEnvio> detalleEnvioList = List.of(detalleEnvio);

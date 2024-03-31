@@ -68,7 +68,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void guardarCliente() {
+    void givenClienteService_whenGuardarCliente_thenReturnClienteGuardado() {
         when(clienteRepository.save(any())).thenReturn(cliente);
 
         ClienteToSaveDto clienteAGuardar = new ClienteToSaveDto(null,
@@ -85,7 +85,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void actualizarCliente() throws NotFoundExceptionEntity {
+    void givenClienteService_whenActualizarCliente_thenReturnClienteActualizado() throws NotFoundExceptionEntity {
         when(clienteRepository.findById(any())).thenReturn(Optional.of(cliente));
 
         ClienteToSaveDto clienteAActualizar= new ClienteToSaveDto(null,
@@ -103,7 +103,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientePorId() throws NotFoundExceptionEntity {
+    void givenClienteService_whenBuscarClientePorId_thenReturnClienteEncontrado() throws NotFoundExceptionEntity {
         when(clienteRepository.findById(any())).thenReturn(Optional.of(cliente));
 
         when(clienteMapper.toDto(any())).thenReturn(clienteDto);
@@ -114,7 +114,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void removercliente() {
+    void givenClienteService_whenRemoverCliente_thenMenaje() {
         Long idCliente = 1l;
         when(clienteRepository.findById(any())).thenReturn(Optional.of(cliente));
         clienteService.removercliente(idCliente);
@@ -123,7 +123,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void getAllCliente() {
+    void givenClienteService_whenGetAllCliente_thenReturnListOfCliente() {
         List<Cliente> clientes = List.of(cliente, cliente2, cliente3);
 
         when(clienteRepository.findAll()).thenReturn(clientes);
@@ -135,7 +135,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientePorEmail() throws NotFoundExceptionEntity {
+    void givenClienteService_whenBuscarClientePorEmail_thenReturnClienteEncontrado() throws NotFoundExceptionEntity {
         String emailCliente = "privado@privado.com";
 
         when(clienteRepository.findByEmailCliente(any())).thenReturn(cliente);
@@ -148,7 +148,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientesPorDireccion() throws NotFoundExceptionEntity {
+    void givenClienteService_whenBuscarClientesPorDireccion_thenReturnListOfCliente() throws NotFoundExceptionEntity {
         List<Cliente> clientes = List.of(cliente, cliente3);
         String direccionCliente = "Calle 29";
 
@@ -161,7 +161,7 @@ class ClienteServiceImplTest {
     }
 
     @Test
-    void buscarClientesQueComiencenPor() throws NotFoundExceptionEntity {
+    void givenClienteService_whenBuscarClientesQueComiencenPor_thenReturnListOfCliente() throws NotFoundExceptionEntity {
         List<Cliente> clientes = List.of(cliente, cliente3);
         String nombreCliente = "Walter";
 

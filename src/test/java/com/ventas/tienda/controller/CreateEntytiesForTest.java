@@ -1,4 +1,4 @@
-package com.ventas.tienda.dto;
+package com.ventas.tienda.controller;
 
 import com.ventas.tienda.Entities.*;
 import com.ventas.tienda.Enum.MetodoPago;
